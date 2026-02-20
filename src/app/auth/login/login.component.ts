@@ -30,10 +30,19 @@ export class LoginComponent {
       }
       this.authService.login(loginRequest).subscribe({
         next: res => {
-        if(res.role == "ADMIN"){
-          this.router.navigate(['/admin'])
-        }else {
-          this.router.navigate(['/user'])
+        // if(res.role == "ADMIN"){
+        //   this.router.navigate(['/admin'])
+        // }else {
+        //   this.router.navigate(['/user'])
+        // }
+        if (this.authService.hasRole('ADMIN')) {
+          console.log("Redirecting to Admin")
+          this.router.navigate(['/admin']);
+        } else if (this.authService.hasRole('INSTRUCTOR')) {
+          console.log("Redirecting to AdAAAA")
+          this.router.navigate(['/instructor']);
+        } else if (this.authService.hasRole('STUDENT')) {
+          this.router.navigate(['/user']);
         }
       },
       error: () => {
