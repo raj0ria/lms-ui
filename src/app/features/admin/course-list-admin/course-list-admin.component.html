@@ -1,0 +1,99 @@
+<!-- <app-nav-bar></app-nav-bar>
+<h2>Course Management</h2>
+<table>
+  <tr>
+    <th>Title</th><th>Instructor</th><th>Published</th><th>Actions</th>
+  </tr>
+  <tr *ngFor="let c of courses">
+    <td>{{ c.title }}</td>
+    <td>{{ c.instructor }}</td>
+    <td>{{ c.published ? 'Yes' : 'No' }}</td>
+    <td>
+      <button (click)="togglePublish(c)">Toggle Publish</button>
+      <button (click)="deleteCourse(c.id)">Delete</button>
+    </td>
+  </tr>
+</table> -->
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="course-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2>Course Management</h2>
+      <p class="subtitle">Manage all platform courses</p>
+    </div>
+    <div class="stats">
+      Total Courses: <strong>{{ courses.length }}</strong>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input
+      type="text"
+      placeholder="Search by title..."
+      [(ngModel)]="searchTerm"
+    />
+
+    <select [(ngModel)]="publishedFilter">
+      <option value="">All</option>
+      <option value="true">Published</option>
+      <option value="false">Unpublished</option>
+    </select>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="filteredCourses().length === 0" class="empty-state">
+    No courses found.
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="filteredCourses().length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Instructor</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of filteredCourses()">
+
+          <td>{{ c.title }}</td>
+          <td>{{ c.instructor }}</td>
+
+          <td>
+            <span 
+              class="status-badge"
+              [ngClass]="c.published ? 'published' : 'draft'">
+              {{ c.published ? 'Published' : 'Draft' }}
+            </span>
+          </td>
+
+          <td class="actions">
+            <button 
+                class="publish-btn"
+                (click)="togglePublish(c)">
+                {{ c.published ? 'Unpublish' : 'Publish' }}
+            </button>
+
+            <button 
+              class="delete-btn"
+              (click)="deleteCourse(c.id)">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

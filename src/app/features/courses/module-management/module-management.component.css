@@ -1,0 +1,109 @@
+.detail-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.course-info h2 {
+  margin-bottom: 5px;
+}
+
+.modules-section, .enrollments-section {
+  margin-top: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.empty-state {
+  font-style: italic;
+  color: #777;
+  margin-top: 10px;
+}
+
+.module-list, .enrollment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.module-list li, .enrollment-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.module-title {
+  font-weight: 500;
+}
+
+.module-actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.module-actions .delete-btn:hover {
+  background-color: #c82333;
+}
+
+.student-name {
+  font-weight: 500;
+}
+
+.progress {
+  font-size: 14px;
+  color: #555;
+}
+
+
+.module-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.module-link a {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.module-link a:hover {
+  text-decoration: underline;
+}
+

@@ -1,0 +1,52 @@
+<app-nav-bar></app-nav-bar>
+<div class="edit-container">
+
+  <div class="edit-card">
+    <h2>Edit Course</h2>
+
+    <form [formGroup]="courseForm" (ngSubmit)="updateCourse()">
+
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" formControlName="title" />
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" formControlName="category" />
+      </div>
+
+      <div class="form-group">
+        <label>Capacity</label>
+        <input type="number" formControlName="capacity" />
+      </div>
+
+      <div class="form-group checkbox">
+        <input type="checkbox" formControlName="published" />
+        <label>Published</label>
+      </div>
+
+      <div class="button-group">
+        <button type="button" routerLink="/instructor" class="cancel-btn">
+          Cancel
+        </button>
+
+        <button type="submit" class="save-btn"
+          [disabled]="courseForm.invalid">
+          Save Changes
+        </button>
+      </div>
+
+      <div *ngIf="successMessage" class="success">
+        {{ successMessage }}
+      </div>
+
+    </form>
+  </div>
+
+</div>

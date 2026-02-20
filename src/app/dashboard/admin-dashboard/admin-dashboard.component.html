@@ -1,0 +1,58 @@
+<!-- <app-nav-bar></app-nav-bar>
+<h2>Admin Dashboard</h2>
+<p>Total Users: {{ stats.users }}</p>
+<p>Total Courses: {{ stats.courses }}</p>
+<p>Total Instructors : {{ stats.instructors }}</p>
+<p>Total Enrollments: {{ stats.enrollments }}</p> -->
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="dashboard-container">
+
+  <div class="header">
+    <h2>Admin Dashboard</h2>
+    <p class="subtitle">System overview and statistics</p>
+  </div>
+
+  <div class="stats-grid">
+
+    <div class="stat-card users">
+      <div class="stat-info">
+        <h3>{{ stats.users }}</h3>
+        <p>Total Users</p>
+      </div>
+    </div>
+
+    <div class="stat-card courses">
+      <div class="stat-info">
+        <h3>{{ stats.courses }}</h3>
+        <p>Total Courses</p>
+      </div>
+    </div>
+
+    <div class="stat-card instructors">
+      <div class="stat-info">
+        <h3>{{ stats.instructors }}</h3>
+        <p>Total Instructors</p>
+      </div>
+    </div>
+
+    <div class="stat-card enrollments">
+      <div class="stat-info">
+        <h3>{{ stats.enrollments }}</h3>
+        <p>Total Enrollments</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="actions">
+      <button routerLink="/admin/users">Manage Users</button>
+      <button routerLink="/admin/courses">Manage Courses</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,102 @@
+<!-- <app-nav-bar></app-nav-bar>
+<h2>Student Dashboard</h2>
+<ul>
+  <li *ngFor="let c of enrolledCourses">
+    {{ c.title }} - Progress: {{ c.progress }}
+  </li>
+</ul> -->
+
+
+
+
+
+
+
+<!-- <app-nav-bar></app-nav-bar>
+
+<div class="student-dashboard-container">
+
+  <div class="header">
+    <h2>Student Dashboard</h2>
+    <p class="subtitle">View your enrolled courses and track progress</p>
+  </div>
+
+  <div *ngIf="enrolledCourses.length === 0" class="empty-state">
+    You have not enrolled in any courses yet.
+  </div>
+
+  <div class="courses-grid" *ngIf="enrolledCourses.length > 0">
+    <div class="course-card" *ngFor="let c of enrolledCourses">
+      <h3>{{ c.title }}</h3>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="c.progress"></div>
+        </div>
+        <span class="progress-text">{{ c.progress }}%</span>
+      </div>
+    </div>
+  </div>
+
+</div> -->
+
+
+
+
+
+
+
+<!-- <app-nav-bar></app-nav-bar>
+
+<div class="dashboard-container">
+  <h2>My Courses</h2>
+
+  <ng-container *ngIf="enrollments$ | async as enrollments">
+    <div *ngIf="enrollments.length === 0">
+      You are not enrolled in any courses yet.
+    </div>
+
+    <ul *ngIf="enrollments.length > 0">
+      <li *ngFor="let e of enrollments">
+        {{ e.courseId | courseTitle }} - Progress: {{ e.progress }}%
+        <a [routerLink]="['/courses', e.courseId]">View Course</a>
+      </li>
+    </ul>
+  </ng-container>
+</div> -->
+
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="dashboard-container">
+  <h2>Student Dashboard</h2>
+
+  <ng-container *ngIf="enrollments$ | async as enrollments">
+
+    <div *ngIf="enrollments.length === 0" class="empty-state">
+      You are not enrolled in any courses yet.
+    </div>
+
+    <table *ngIf="enrollments.length > 0" class="enrollments-table">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Progress</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of enrollments">
+          <td>{{ e.courseId | courseTitle }}</td>
+          <td>{{ e.progress }}%</td>
+          <td>
+            <a [routerLink]="['/courses', e.courseId]">View Course</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </ng-container>
+</div>
+

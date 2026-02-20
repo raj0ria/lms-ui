@@ -1,0 +1,168 @@
+<!-- <app-nav-bar>
+<h2>User Management</h2>
+<table>
+  <tr>
+    <th>Name</th><th>Email</th><th>Role</th><th>Actions</th>
+  </tr>
+  <tr *ngFor="let u of users">
+    <td>{{ u.name }}</td>
+    <td>{{ u.email }}</td>
+    <td>{{ u.role }}</td>
+    <td>
+      <select (change)="onRoleChange($event, u)">
+        <option value="ADMIN">Admin</option>
+        <option value="INSTRUCTOR">Instructor</option>
+        <option value="STUDENT">Student</option>
+      </select>
+    </td>
+  </tr>
+</table> -->
+
+<!-- <app-nav-bar></app-nav-bar>
+
+<div class="user-container">
+
+  <div class="header">
+    <h2>User Management</h2>
+    <p class="subtitle">Manage user roles and permissions</p>
+  </div>
+
+  <div *ngIf="users.length === 0" class="empty-state">
+    No users found.
+  </div>
+
+  <div class="table-wrapper" *ngIf="users.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Change Role</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of users">
+
+          <td>{{ u.name }}</td>
+
+          <td>{{ u.email }}</td>
+
+          <td>
+            <span 
+              class="role-badge"
+              [ngClass]="{
+                admin: u.role === 'ADMIN',
+                instructor: u.role === 'INSTRUCTOR',
+                student: u.role === 'STUDENT'
+              }">
+              {{ u.role }}
+            </span>
+          </td>
+
+          <td>
+            <select 
+              [value]="u.role"
+              (change)="onRoleChange($event, u)">
+              <option value="ADMIN">Admin</option>
+              <option value="INSTRUCTOR">Instructor</option>
+              <option value="STUDENT">Student</option>
+            </select>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div> -->
+
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="user-container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2>User Management</h2>
+      <p class="subtitle">Manage user roles and permissions</p>
+    </div>
+    <div class="stats">
+      Total Users: <strong>{{ users.length }}</strong>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input 
+      type="text"
+      placeholder="Search by name or email..."
+      [(ngModel)]="searchTerm"
+    />
+
+    <select [(ngModel)]="selectedRole">
+      <option value="">All Roles</option>
+      <option value="ADMIN">Admin</option>
+      <option value="INSTRUCTOR">Instructor</option>
+      <option value="STUDENT">Student</option>
+    </select>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="filteredUsers().length === 0" class="empty-state">
+    No users found.
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="filteredUsers().length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Change Role</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of filteredUsers()">
+
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+
+          <td>
+            <span 
+              class="role-badge"
+              [ngClass]="u.role.toLowerCase()">
+              {{ u.role }}
+            </span>
+          </td>
+
+          <td>
+            <select
+                [value]="u.role"
+                (change)="onRoleChange($event, u)">
+                <option value="ADMIN">Admin</option>
+                <option value="INSTRUCTOR">Instructor</option>
+                <option value="STUDENT">Student</option>
+            </select>
+          </td>
+          <td>
+            <button 
+              class="delete-btn"
+              (click)="deleteUser(u.id)">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

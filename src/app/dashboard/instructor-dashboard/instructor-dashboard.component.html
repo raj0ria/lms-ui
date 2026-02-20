@@ -1,0 +1,150 @@
+<!-- <app-nav-bar></app-nav-bar>
+<div class="dashboard-container">
+  <div class="header">
+    <h2>Instructor Dashboard</h2>
+    <button routerLink="/courses/create" class="create-btn">
+      + Create New Course
+    </button>
+  </div>
+
+  <div *ngIf="myCourses.length === 0" class="empty-state">
+    <p>No courses created yet.</p>
+  </div>
+
+  <div class="courses-grid">
+    <div class="course-card" *ngFor="let c of myCourses">
+
+      <div class="card-header">
+        <h3>{{ c.title }}</h3>
+        <span 
+          class="status"
+          [ngClass]="{ published: c.published, draft: !c.published }">
+          {{ c.published ? 'Published' : 'Draft' }}
+        </span>
+      </div>
+
+      <p class="capacity">
+        Capacity: <strong>{{ c.capacity }}</strong>
+      </p>
+
+      <div class="actions">
+        <button 
+          class="publish-btn"
+          (click)="togglePublish(c)">
+          {{ c.published ? 'Unpublish' : 'Publish' }}
+        </button>
+
+        <button 
+          class="edit-btn"
+          [routerLink]="['/courses/edit', c.id]">
+          Edit
+        </button>
+
+        <button 
+          class="delete-btn"
+          (click)="deleteCourse(c.id)">
+          Delete
+        </button>
+      </div>
+
+    </div>
+  </div> 
+ </div>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <app-nav-bar></app-nav-bar>
+
+<div class="dashboard-container">
+
+  <div class="header">
+    <h2>Instructor Dashboard</h2>
+    <button routerLink="/courses/create" class="create-btn">
+      + Create New Course
+    </button>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-cards">
+    <div class="stat-card">
+      <h4>Total Courses</h4>
+      <p>{{ totalCourses }}</p>
+    </div>
+    <div class="stat-card">
+      <h4>Published</h4>
+      <p>{{ publishedCourses }}</p>
+    </div>
+    <div class="stat-card">
+      <h4>Drafts</h4>
+      <p>{{ draftCourses }}</p>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="myCourses.length === 0" class="empty-state">
+    <p>No courses created yet.</p>
+  </div>
+
+  <!-- Course Cards -->
+  <div class="courses-grid">
+    <div class="course-card" *ngFor="let c of myCourses">
+
+      <div class="card-header">
+        <h3>{{ c.title }}</h3>
+        <span 
+          class="status"
+          [ngClass]="{ published: c.published, draft: !c.published }">
+          {{ c.published ? 'Published' : 'Draft' }}
+        </span>
+      </div>
+
+      <p class="capacity">
+        Capacity: <strong>{{ c.capacity }}</strong>
+      </p>
+
+      <div class="actions">
+
+        <button 
+          class="publish-btn"
+          (click)="togglePublish(c)">
+          {{ c.published ? 'Unpublish' : 'Publish' }}
+        </button>
+
+        <button 
+          class="edit-btn"
+          [routerLink]="['/courses/edit', c.id]">
+          Edit
+        </button>
+
+        <button 
+          class="view-btn"
+          [routerLink]="['/courses', c.id]">
+          View Details
+        </button>
+
+        <button 
+          class="delete-btn"
+          (click)="deleteCourse(c.id)">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

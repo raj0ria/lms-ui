@@ -1,0 +1,121 @@
+.user-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.stats {
+  font-weight: bold;
+  color: #334155;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.controls input,
+.controls select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+.controls input:focus,
+.controls select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+thead {
+  background-color: #1e293b;
+  color: white;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Role badges */
+.role-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
+}
+
+.role-badge.admin {
+  background-color: #ef4444;
+}
+
+.role-badge.instructor {
+  background-color: #3b82f6;
+}
+
+.role-badge.student {
+  background-color: #10b981;
+}
+
+/* Select */
+select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}

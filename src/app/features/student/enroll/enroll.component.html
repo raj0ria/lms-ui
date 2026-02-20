@@ -1,0 +1,24 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="enroll-container">
+  <h2>My Enrolled Courses</h2>
+
+  <ng-container *ngIf="enrolledCourses$ | async as courses">
+    <div *ngIf="courses.length === 0" class="empty-state">
+      You have not enrolled in any courses yet.
+    </div>
+
+    <ul *ngIf="courses.length > 0" class="course-list">
+      <li *ngFor="let course of courses" class="course-card">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+        <p>Capacity: {{ course.capacity }}</p>
+        <p>Status: {{ course.published ? 'Published' : 'Draft' }}</p>
+
+        <div class="actions">
+          <a [routerLink]="['/courses', course.id]" class="view-btn">View Course</a>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+</div>

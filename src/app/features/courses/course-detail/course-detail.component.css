@@ -1,0 +1,153 @@
+.detail-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+/* Course Header */
+.detail-container h2 {
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.detail-container p {
+  color: #475569;
+  margin-bottom: 30px;
+}
+
+/* Section Titles */
+.detail-container h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #334155;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+/* Add Module Button */
+button[routerLink] {
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease;
+}
+
+button[routerLink]:hover {
+  background-color: #2563eb;
+}
+
+/* Empty State */
+.detail-container div[ng-reflect-ng-if="true"] {
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Module Cards */
+ul li {
+  background: white;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Delete Button */
+ul li button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+ul li button:hover {
+  background-color: #dc2626;
+}
+
+/* Enrollment Progress Styling */
+ul li span {
+  font-weight: 500;
+}
+
+/* Progress Percentage */
+ul li::after {
+  content: "";
+}
+
+/* Optional: Responsive */
+@media (max-width: 768px) {
+  ul li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+
+/* Back Button */
+.back-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+/* Add Module Button */
+.add-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.add-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Empty State */
+.empty-state {
+  color: #64748b;
+  margin-bottom: 10px;
+}

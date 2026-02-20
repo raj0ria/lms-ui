@@ -1,0 +1,94 @@
+<!-- <div>
+    <div>
+        Dashbaord
+        <a *ngIf="authService.hasRole('ADMIN')" routerLink="/admin">Admin Dashboard</a> |
+        <a routerLink="/user">User Dashboard</a> |
+        <button style="float: right;" (click)="handleLogout()">Logout</button>
+    </div>
+</div> -->
+
+<!-- <nav>
+  <ul>
+    <li *ngIf="authService.hasRole('ADMIN')">
+      <a routerLink="/admin">Admin Dashboard</a>
+    </li>
+    <li *ngIf="authService.hasRole('ADMIN')">
+      <a routerLink="/admin/users">Manage Users</a>
+    </li>
+    <li *ngIf="authService.hasRole('ADMIN')">
+      <a routerLink="/admin/courses">Manage Courses</a>
+    </li>
+
+    <li *ngIf="authService.hasRole('INSTRUCTOR')">
+      <a routerLink="/instructor">Instructor Dashboard</a>
+    </li>
+    <li *ngIf="authService.hasRole('INSTRUCTOR')">
+      <a routerLink="/courses/create">Create Course</a>
+    </li>
+    <li *ngIf="authService.hasRole('INSTRUCTOR')">
+      <a routerLink="/modules/create">Create Module</a>
+    </li>
+
+    <li *ngIf="authService.hasRole('STUDENT')">
+      <a routerLink="/student">Student Dashboard</a>
+    </li>
+    <li *ngIf="authService.hasRole('STUDENT')">
+      <a routerLink="/courses">Browse Courses</a>
+    </li>
+    <li *ngIf="authService.hasRole('STUDENT')">
+      <a routerLink="/enrollments/create">Enroll</a>
+    </li>
+
+    <button style="float: right;" (click)="handleLogout()">Logout</button>
+  </ul>
+</nav> -->
+
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- Logo / App Name -->
+    <div class="logo">
+      <a routerLink="/">CoursePlatform</a>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+
+      <!-- Admin -->
+      <ng-container *ngIf="authService.hasRole('ADMIN')">
+        <li><a routerLink="/admin" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/admin/users" routerLinkActive="active">Users</a></li>
+        <li><a routerLink="/admin/courses" routerLinkActive="active">Courses</a></li>
+      </ng-container>
+
+      <!-- Instructor -->
+      <ng-container *ngIf="authService.hasRole('USER')">
+        <li><a routerLink="/instructor" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/courses/create" routerLinkActive="active">Create Course</a></li>
+        <li>
+            <!-- <a routerLink="['/courses', course.id, 'modules', 'create']" routerLinkActive="active">Create Module</a> -->
+            <!-- <a [routerLink]="['/courses', courseId, 'modules', 'create']"
+                routerLinkActive="active">Create Module
+            </a> -->
+            <a routerLink="['/modules/create']" routerLinkActive="active">Create Module</a>
+        </li>
+      </ng-container>
+
+      <!-- Student -->
+      <ng-container *ngIf="authService.hasRole('USER')">
+        <li><a routerLink="/user" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/courses" routerLinkActive="active">Browse</a></li>
+        <li><a routerLink="/enrollments/create" routerLinkActive="active">Enroll</a></li>
+      </ng-container>
+
+    </ul>
+
+    <!-- Logout -->
+    <div class="logout-section">
+      <button class="logout-btn" (click)="handleLogout()">Logout</button>
+    </div>
+
+  </div>
+
+</nav>
+

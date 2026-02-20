@@ -1,0 +1,65 @@
+.enroll-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #777;
+  margin: 40px 0;
+}
+
+.course-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fff;
+  transition: 0.3s box-shadow;
+}
+
+.course-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.course-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.view-btn {
+  text-decoration: none;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.view-btn:hover {
+  background: #0056b3;
+}

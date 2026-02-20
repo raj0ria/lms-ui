@@ -1,0 +1,106 @@
+/* Center the form */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f1f5f9;
+  padding: 20px;
+}
+
+/* Card style */
+.register-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-card h2 {
+  margin-bottom: 25px;
+  color: #1e293b;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #334155;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+/* Error messages */
+.error, .error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Login link */
+.login-link {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.login-link a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media(max-width: 480px){
+  .register-card {
+    padding: 30px 20px;
+  }
+}

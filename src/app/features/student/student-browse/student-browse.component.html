@@ -1,0 +1,32 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="browse-container">
+  <h2>Browse Courses</h2>
+
+  <ng-container *ngIf="coursesWithEnrollment$ | async as courses">
+    <div *ngIf="courses.length === 0" class="empty-state">
+      No courses available.
+    </div>
+
+    <ul class="course-list" *ngIf="courses.length > 0">
+      <li *ngFor="let c of courses" class="course-card">
+        <h3>{{ c.title }}</h3>
+        <p>{{ c.description }}</p>
+        <p>Capacity: {{ c.capacity }}</p>
+        <p>Status: {{ c.published ? 'Published' : 'Draft' }}</p>
+        <div class="actions">
+          <!-- <button (click)="enroll(c)" [disabled]="!c.published">
+            Enroll
+          </button>
+          <a [routerLink]="['/courses', c.id]">View Course</a> -->
+          
+          <!-- Show Enroll button only if not enrolled -->
+          <button *ngIf="!c.enrolled" (click)="enroll(c)">Enroll</button>
+
+          <!-- Show "Enrolled" badge if already enrolled -->
+          <span *ngIf="c.enrolled" class="enrolled-badge">Enrolled</span>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
+</div>

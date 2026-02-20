@@ -1,0 +1,80 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="detail-container">
+
+  <button class="back-btn" (click)="goBack()">
+    ← Back to Course
+  </button>
+
+  <div class="course-info">
+    <h2>{{ course?.title }}</h2>
+    <p>{{ course?.description }}</p>
+  </div>
+
+  <div class="modules-section">
+  <div *ngIf="role === 'USER'" class="section-header">     <!--INSTRUCTOR -->
+    <h3>Modules</h3>
+    <button class="add-btn"
+      [routerLink]="['/courses', course.id, 'modules', 'create']">
+      + Add Module
+    </button>
+  </div>
+
+  <ng-container *ngIf="modules$ | async as modules">
+    
+    <div *ngIf="modules.length === 0" class="empty-state">
+      No modules added yet.
+    </div>
+
+    <ul class="module-list" *ngIf="modules.length > 0">
+      <li *ngFor="let m of modules">
+        <div class="module-info">
+          <div class="module-title">
+            {{ m.title }} ({{ m.contentType }})
+          </div>
+
+          <div class="module-link">
+            <a *ngIf="m.contentType === 'video'" 
+              [href]="m.contentUrl" 
+              target="_blank">
+              ▶ Watch Video
+            </a>
+
+            <a *ngIf="m.contentType === 'document'" 
+              [href]="m.contentUrl" 
+              target="_blank">
+              📄 View Document
+            </a>
+          </div>
+        </div>
+        <button *ngIf="role === 'USER'" class="delete-btn" (click)="deleteModule(m.id)">
+          Delete
+        </button>
+      </li>
+    </ul>
+  </ng-container>
+</div>
+
+
+  <div *ngIf="role === 'USER'" class="enrollments-section">
+  <h3>Enrolled Students</h3>
+
+  <ng-container *ngIf="enrollments$ | async as enrollments">
+
+    <div *ngIf="enrollments.length === 0" class="empty-state">
+      No students enrolled yet.
+    </div>
+
+    <ul *ngIf="enrollments.length > 0" class="enrollment-list">
+      <li *ngFor="let e of enrollments">
+        <span class="student-name">{{ e.studentName }}</span>
+        <span class="progress">
+          Progress: {{ e.progress }}%
+        </span>
+      </li>
+    </ul>
+
+  </ng-container>
+</div>
+
+</div>

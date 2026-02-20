@@ -1,0 +1,74 @@
+<!-- <app-nav-bar></app-nav-bar>
+<div class="form-container">
+<h2>Create Course</h2>
+<form [formGroup]="courseForm" (ngSubmit)="submit()">
+  <div>
+    <label>Title</label>
+    <input formControlName="title" />
+  </div>
+  <div>
+    <label>Description</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+  <div>
+    <label>Capacity</label>
+    <input type="number" formControlName="capacity" />
+  </div>
+  <button type="submit" [disabled]="courseForm.invalid">Create</button>
+  
+</form>
+
+<div *ngIf="successMessage" style="color: green; margin-top: 10px;"> 
+    {{ successMessage }} 
+</div>
+
+<button mat-raised-button color="warn" type="button" routerLink="/instructor">Back</button>
+</div> -->
+
+
+
+
+
+<app-nav-bar></app-nav-bar>
+<div class="form-container">
+  <h2>Create Course</h2>
+
+  <form [formGroup]="courseForm" (ngSubmit)="submit()">
+
+    <!-- Title -->
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" />
+      <small *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched">
+        Title is required (min 3 characters)
+      </small>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label>Description</label>
+      <textarea rows="4" formControlName="description"></textarea>
+      <small *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+        Description is required (min 10 characters)
+      </small>
+    </div>
+
+    <!-- Capacity -->
+    <div class="form-group">
+      <label>Capacity</label>
+      <input type="number" formControlName="capacity" />
+      <small *ngIf="courseForm.get('capacity')?.invalid && courseForm.get('capacity')?.touched">
+        Capacity must be at least 1
+      </small>
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+      <button type="submit" [disabled]="courseForm.invalid">Submit</button>
+      <button type="button" class="back-btn" routerLink="/instructor">Back</button>
+    </div>
+  </form>
+  <div *ngIf="successMessage" style="color: green; margin-top: 10px;"> 
+    {{ successMessage }} 
+</div>
+</div>

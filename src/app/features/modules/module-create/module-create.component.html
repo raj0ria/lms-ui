@@ -1,0 +1,99 @@
+<!-- <h2>Create Module</h2>
+<form [formGroup]="moduleForm" (ngSubmit)="submit()">
+  <div>
+    <label>Course ID</label>
+    <input formControlName="courseId" />
+  </div>
+  <div>
+    <label>Title</label>
+    <input formControlName="title" />
+  </div>
+  <div>
+    <label>Content Type</label>
+    <select formControlName="contentType">
+      <option value="video">Video</option>
+      <option value="document">Document</option>
+    </select>
+  </div>
+  <div>
+    <label>Content URL</label>
+    <input formControlName="contentUrl" />
+  </div>
+  <button type="submit" [disabled]="moduleForm.invalid">Add Module</button>
+</form> -->
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="module-container">
+
+  <div class="module-card">
+    <h2>Create Module</h2>
+    <p class="subtitle">Add learning content to a course</p>
+
+    <form [formGroup]="moduleForm" (ngSubmit)="submit()">
+
+      <!-- Course Selection -->
+      <div class="form-group">
+        <label>Course</label>
+        <select formControlName="courseId">
+          <option value="">Select Course</option>
+          <option *ngFor="let c of courses" [value]="c.id">
+            {{ c.title }}
+          </option>
+        </select>
+        <small *ngIf="moduleForm.get('courseId')?.invalid && moduleForm.get('courseId')?.touched">
+          Course is required
+        </small>
+      </div>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label>Module Title</label>
+        <input type="text" formControlName="title" placeholder="Enter module title" />
+        <small *ngIf="moduleForm.get('title')?.invalid && moduleForm.get('title')?.touched">
+          Title is required
+        </small>
+      </div>
+
+      <!-- Content Type -->
+      <div class="form-group">
+        <label>Content Type</label>
+        <select formControlName="contentType">
+          <option value="">Select Type</option>
+          <option value="video">Video</option>
+          <option value="document">Document</option>
+        </select>
+        <small *ngIf="moduleForm.get('contentType')?.invalid && moduleForm.get('contentType')?.touched">
+          Content type is required
+        </small>
+      </div>
+
+      <!-- Content URL -->
+      <div class="form-group">
+        <label>Content URL</label>
+        <input type="text" formControlName="contentUrl" placeholder="Enter content URL" />
+        <small *ngIf="moduleForm.get('contentUrl')?.invalid && moduleForm.get('contentUrl')?.touched">
+          Content URL is required
+        </small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="button" class="secondary-btn" (click)="goBack()">
+            Back
+        </button>
+        <button type="submit" class="primary-btn" [disabled]="moduleForm.invalid">
+          Add Module
+        </button>
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+
+    </form>
+  </div>
+
+</div>

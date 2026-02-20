@@ -1,0 +1,43 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="detail-container">
+
+  <!-- Back Button -->
+  <button class="back-btn" routerLink="/instructor">
+    ← Back
+  </button>
+
+  <h2>{{ course?.title }}</h2>
+  <p>{{ course?.description }}</p>
+
+  <h3>Modules</h3>
+  <button [routerLink]="['/courses', course.id, 'modules', 'create']">
+    + Add Module
+  </button>
+
+  <div *ngIf="modules.length === 0" class="empty-state">
+    No modules added yet.
+  </div>
+
+  <ul>
+    <li *ngFor="let m of modules">
+      <span>{{ m.title }} ({{ m.contentType }})</span>
+      <button class="delete-btn" (click)="deleteModule(m.id)">
+        Delete
+      </button>
+    </li>
+  </ul>
+
+  <h3>Enrolled Students</h3>
+
+  <div *ngIf="enrollments.length === 0" class="empty-state">
+    No students enrolled yet.
+  </div>
+
+  <ul>
+    <li *ngFor="let e of enrollments">
+      <span>{{ e.studentName }} - Progress: {{ e.progress }}%</span>
+    </li>
+  </ul>
+
+</div>
