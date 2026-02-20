@@ -1,3 +1,3 @@
 export const environment = {
-    apiBaseUrl: "http://localhost:8080"
+    apiBaseUrl: "https://lms-latest-x66t.onrender.com"
 };
