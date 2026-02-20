@@ -14,7 +14,7 @@ import { LoginRequest } from 'src/app/models/auth';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   })
   errorMessage: string =''
@@ -25,7 +25,7 @@ export class LoginComponent {
     this.errorMessage =''
     if(this.loginForm.valid){
       const loginRequest: LoginRequest = {
-        username: this.loginForm.value.username!,
+        email: this.loginForm.value.email!,
         password: this.loginForm.value.password!
       }
       this.authService.login(loginRequest).subscribe({

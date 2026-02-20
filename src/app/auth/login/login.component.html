@@ -26,15 +26,15 @@
 
       <!-- Username -->
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="email">Email</label>
         <input 
-          id="username"
+          id="email"
           type="text" 
-          formControlName="username" 
-          placeholder="Enter username"
+          formControlName="email" 
+          placeholder="Enter email"
         />
-        <div class="error" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-          Username is required
+        <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          Email is required
         </div>
       </div>
 
