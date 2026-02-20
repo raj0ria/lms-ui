@@ -9,7 +9,8 @@ export interface AuthResponse {
 }
 
 export interface RegisterRequest {
-    username: string;
+    name: string;
+    email: string,
     password: string;
     role?: string;
 }

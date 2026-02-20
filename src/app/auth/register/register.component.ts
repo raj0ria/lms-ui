@@ -13,10 +13,12 @@ import { RegisterRequest } from 'src/app/models/auth';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
 registerForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    role: new FormControl('USER', [Validators.required])
+    role: new FormControl('STUDENT', [Validators.required])
   })
   errorMessage: string =''
   successMessage: string = '';
@@ -46,40 +48,84 @@ registerForm = new FormGroup({
   //   }
   // }
 
+
+
+
+  // handleSubmit() {
+  //   this.errorMessage = '';
+  //   this.successMessage = '';
+
+  //   if (this.registerForm.valid) {
+  //     const registerRequest: RegisterRequest = {
+  //       username: this.registerForm.value.username!,
+  //       email: this.registerForm.value.email!,
+  //       password: this.registerForm.value.password!,
+  //       role: this.registerForm.value.role!
+  //     };
+
+  //     this.authService.register(registerRequest).subscribe({
+  //       next: (res) => {
+  //         if (res.message) {
+  //           // Show success message
+  //           this.successMessage = `"${registerRequest.role}" "${registerRequest.username}" registered successfully!`;
+  //           this.errorMessage = '';
+
+  //           // Reset form
+  //           this.registerForm.reset({ role: 'USER' });
+
+  //           // Optionally redirect to login after 3-5 seconds
+  //           setTimeout(() => {
+  //             this.router.navigate(['/login']);
+  //           }, 4000);
+  //         }
+  //       },
+  //       error: () => {
+  //         this.errorMessage = 'Registration failed, please try again';
+  //       }
+  //     });
+  //   } else {
+  //     this.errorMessage = 'Invalid username / password';
+  //   }
+  // }
+
+
   handleSubmit() {
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (this.registerForm.valid) {
-      const registerRequest: RegisterRequest = {
-        username: this.registerForm.value.username!,
-        password: this.registerForm.value.password!,
-        role: this.registerForm.value.role!
-      };
-
-      this.authService.register(registerRequest).subscribe({
-        next: (res) => {
-          if (res.message) {
-            // Show success message
-            this.successMessage = `User "${registerRequest.username}" registered successfully!`;
-            this.errorMessage = '';
-
-            // Reset form
-            this.registerForm.reset({ role: 'USER' });
-
-            // Optionally redirect to login after 3-5 seconds
-            setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 4000);
-          }
-        },
-        error: () => {
-          this.errorMessage = 'Registration failed, please try again';
-        }
-      });
-    } else {
-      this.errorMessage = 'Invalid username / password';
+    if (!this.registerForm.valid) {
+      this.errorMessage = 'Please fill all fields correctly.';
+      return;
     }
+
+    const registerRequest: RegisterRequest = {
+      name: this.registerForm.value.name!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+      role: this.registerForm.value.role!
+    };
+
+    this.authService.register(registerRequest).subscribe({
+      next: (res) => {
+
+        this.successMessage = res.message || 'Registration successfull!';
+        this.registerForm.reset({ role: 'STUDENT' });
+
+        // Redirect after success
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2000);
+      },
+      error: (err) => {
+        console.error(err);
+
+        if (err.error?.message) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      }
+    });
   }
 
 }

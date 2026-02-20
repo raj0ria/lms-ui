@@ -37,15 +37,29 @@
 
       <!-- Username -->
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="name">Name</label>
         <input 
-          id="username"
+          id="name"
           type="text" 
-          formControlName="username" 
-          placeholder="Enter username"
+          formControlName="name" 
+          placeholder="Enter name"
         />
-        <div class="error" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
-          Username is required
+        <div class="error" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+          Name is required
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          id="email"
+          type="text" 
+          formControlName="email" 
+          placeholder="Enter email"
+        />
+        <div class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Email is required
         </div>
       </div>
 
@@ -67,9 +81,10 @@
       <div class="form-group">
         <label for="role">Role</label>
         <select id="role" formControlName="role">
-          <option value="USER">User</option>
-          <option value="ADMIN">Admin</option>
-          <option value="INSTRUCTOR">Instructor</option>
+          <!-- <option value="USER">User</option> -->
+          <option value="STUDENT">STUDENT</option>
+          <!-- <option value="ADMIN">Admin</option> -->
+          <option value="INSTRUCTOR">INSTRUCTOR</option>
         </select>
       </div>
 

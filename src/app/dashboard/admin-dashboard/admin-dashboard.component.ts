@@ -14,7 +14,13 @@ import { Course } from 'src/app/services/course.service';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent { 
-  stats = { users: 120, courses: 15, enrollments: 300, instructors: 230 }; 
+
+  stats = { 
+    users: 0, 
+    courses: 0, 
+    enrollments: 0, 
+    instructors: 0 
+  }; 
 
   users$!: Observable<any>;
   selectedOrder$!: Observable<any>;
@@ -24,7 +30,22 @@ export class AdminDashboardComponent {
   ) {}
   
   ngOnInit() {
-    this.loadOrders();
+    // this.loadOrders();
+    this.loadDashboardStats();
+  }
+
+  loadDashboardStats() {
+    this.userService.getDashboardStats().subscribe({
+      next: (data) => {
+        this.stats.users = data.totalStudents;
+        this.stats.instructors = data.totalInstructors;
+        this.stats.courses = data.totalCourses;
+        this.stats.enrollments = data.totalEnrollments;
+      },
+      error: (err) => {
+        console.error('Error loading dashboard stats', err);
+      }
+    });
   }
 
   loadOrders() {

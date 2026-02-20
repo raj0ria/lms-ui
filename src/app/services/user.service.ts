@@ -41,4 +41,8 @@ export class UserService {
   getUserById(id: number) {
     return this.http.get(`${environment.apiBaseUrl}/admin/user/${id}`);
   }
+
+  getDashboardStats() {
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/v1/admin/dashboard/summary`);
+  }
 }
