@@ -7,8 +7,8 @@
     ← Back
   </button>
 
-  <h2>{{ course?.title }}</h2>
-  <p>{{ course?.description }}</p>
+  <h2>{{ course.title }}</h2>
+  <p>{{ course.description }}</p>
 
   <div *ngIf="course as c">
     <h3>Modules</h3>
@@ -56,8 +56,8 @@
     ← Back
   </button>
 
-  <h2 class="course-title">{{ course?.title }}</h2>
-  <p class="course-description">{{ course?.description }}</p>
+  <h2 class="course-title">{{ course.title }}</h2>
+  <p class="course-description">{{ course.description }}</p>
 
   <section *ngIf="course as c" class="modules-section">
     <h3>Modules</h3>
