@@ -15,17 +15,9 @@ import { NavBarComponent } from 'src/app/dashboard/nav-bar/nav-bar.component';
 export class StudentBrowseComponent {
 
   studentName = 'Alice';
-  // courses$: Observable<Course[]>;
   coursesWithEnrollment$!: Observable<(Course & { enrolled: boolean })[]>;
 
-  constructor(private courseService: CourseService) {
-    // Only show published courses
-    // this.courses$ = this.courseService.getCourses();
-
-    // this.courses$ = this.courseService.getCourses().pipe(
-    //   map(courses => courses.filter(c => c.published))
-    // );
-  }
+  constructor(private courseService: CourseService) {}
 
   ngOnInit() {
     // Combine courses and enrollments to mark if student is enrolled
@@ -48,7 +40,7 @@ export class StudentBrowseComponent {
     const enrollment: Enrollment = {
       id: Date.now(),
       courseId: course.id,
-      studentName: 'Alice', // TODO: replace with logged-in student
+      studentName: this.studentName, // TODO: replace with logged-in student
       progress: 0
     };
 

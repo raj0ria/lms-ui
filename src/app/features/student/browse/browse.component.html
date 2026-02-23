@@ -1,0 +1,93 @@
+<app-nav-bar></app-nav-bar>
+<div class="browse-container">
+
+  <h2>Browse Courses</h2>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [(ngModel)]="keyword" 
+      placeholder="Search courses..."
+    />
+    <button (click)="search()">Search</button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    Loading courses...
+  </div>
+
+  <!-- Course Grid -->
+  <div class="course-grid" *ngIf="!loading">
+
+    <div class="course-card" *ngFor="let course of courses">
+
+      <h3>{{ course.title }}</h3>
+
+      <p class="description">
+        {{ course.description }}
+      </p>
+
+      <p><strong>Instructor:</strong> {{ course.instructorName }}</p>
+
+      <div class="actions">
+
+        <!-- If NOT enrolled -->
+        <button class="enroll-btn"
+            *ngIf="!enrolledCourseIds.includes(course.courseId)"
+            (click)="enroll(course.courseId)"
+            [disabled]="enrollingCourseIds.includes(course.courseId)">
+            {{ enrollingCourseIds.includes(course.courseId) ? 'Processing...' : 'Enroll Now' }}
+        </button>
+
+        <!-- If already enrolled -->
+        <button
+            *ngIf="enrolledCourseIds.includes(course.courseId)"
+            class="unenroll-btn"
+            (click)="unenroll(course.courseId)"
+            [disabled]="enrollingCourseIds.includes(course.courseId)">
+            {{ enrollingCourseIds.includes(course.courseId) ? 'Processing...' : 'Unenroll' }}
+        </button>
+
+        </div>
+
+      <!-- <button
+        class="enroll-btn"
+        [disabled]="enrolledCourseIds.includes(course.courseId) 
+                    || enrollingCourseIds.includes(course.courseId)"
+        (click)="enroll(course.courseId)">
+
+        <span *ngIf="enrollingCourseIds.includes(course.courseId)">
+            Enrolling...
+        </span>
+
+        <span *ngIf="!enrollingCourseIds.includes(course.courseId)">
+            {{ enrolledCourseIds.includes(course.courseId) ? 'Enrolled' : 'Enroll Now' }}
+        </span>
+
+      </button> -->
+
+    </div>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+
+    <button (click)="prevPage()" [disabled]="page === 0">
+      Previous
+    </button>
+
+    <span>
+      Page {{ page + 1 }} of {{ totalPages }}
+    </span>
+
+    <button (click)="nextPage()" 
+            [disabled]="page === totalPages - 1">
+      Next
+    </button>
+
+  </div>
+
+</div>

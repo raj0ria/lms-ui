@@ -1,8 +1,8 @@
-<app-nav-bar></app-nav-bar>
+<!-- <app-nav-bar></app-nav-bar>
 
 <div class="detail-container">
 
-  <!-- Back Button -->
+  Back Button
   <button class="back-btn" routerLink="/instructor">
     ← Back
   </button>
@@ -10,10 +10,12 @@
   <h2>{{ course?.title }}</h2>
   <p>{{ course?.description }}</p>
 
-  <h3>Modules</h3>
-  <button [routerLink]="['/courses', course.id, 'modules', 'create']">
-    + Add Module
-  </button>
+  <div *ngIf="course as c">
+    <h3>Modules</h3>
+    <button [routerLink]="['/courses', c.id, 'modules', 'create']">
+        + Add Module
+    </button>
+  </div>
 
   <div *ngIf="modules.length === 0" class="empty-state">
     No modules added yet.
@@ -40,4 +42,150 @@
     </li>
   </ul>
 
+</div> -->
+
+
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="detail-container">
+
+  <!-- Back Button -->
+  <button class="back-btn" routerLink="/instructor" aria-label="Go back to instructor dashboard">
+    ← Back
+  </button>
+
+  <h2 class="course-title">{{ course?.title }}</h2>
+  <p class="course-description">{{ course?.description }}</p>
+
+  <section *ngIf="course as c" class="modules-section">
+    <h3>Modules</h3>
+    <button
+      [routerLink]="['/courses', c.id, 'modules', 'create']"
+      class="btn btn-primary add-module-btn"
+      aria-label="Add new module"
+    >
+      + Add Module
+    </button>
+
+    <div *ngIf="modules.length === 0" class="empty-state">
+      No modules added yet.
+    </div>
+
+    <ul class="modules-list">
+      <li *ngFor="let m of modules" class="module-item">
+        <div class="module-info" (click)="openModule(m)">
+          <strong class="module-name">{{ m.name }}</strong>
+          <span class="module-url">
+            <a href="{{ m.materialUrl }}" target="_blank" rel="noopener noreferrer">
+              View Material
+            </a>
+          </span>
+          <!-- <span class="module-action">
+      <ng-container [ngSwitch]="getMaterialType(m.materialUrl)">
+
+        <a *ngSwitchCase="'video'"
+           [href]="m.materialUrl"
+           target="_blank"
+           class="material-link">
+          ▶ Watch Video
+        </a>
+
+        <a *ngSwitchDefault
+           [href]="m.materialUrl"
+           target="_blank"
+           class="material-link">
+          📄 View Document
+        </a>
+
+      </ng-container>
+    </span> -->
+        </div>
+        <button
+          class="btn btn-danger delete-btn"
+          (click)="deleteModule(m.id)"
+          [attr.aria-label]="'Delete module ' + m.name"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- <section class="enrolled-section">
+    <h3>Enrolled Students</h3>
+    <div *ngIf="enrollments.length === 0" class="empty-state">
+      No students enrolled yet.
+    </div>
+    <ul class="enrollments-list">
+      <li *ngFor="let e of enrollments" class="enrollment-item">
+        <span class="student-name">{{ e.studentName }}</span>
+        <progress
+          class="progress-bar"
+          [value]="e.progress"
+          max="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [attr.aria-valuenow]="e.progress"
+          [attr.aria-label]="'Progress for ' +e.progress"
+        ></progress>
+        <span class="progress-percent">{{ e.progress }}%</span>
+      </li>
+    </ul>
+  </section> -->
+
+
+  <section class="enrolled-section">
+    <h3>Enrolled Students</h3>
+
+    <div *ngIf="students.length === 0 && !loadingStudents" class="empty-state">
+        No students enrolled yet.
+    </div>
+
+    <ul class="enrollments-list">
+        <li *ngFor="let s of students" class="enrollment-item">
+
+        <div class="student-info">
+            <span class="student-name">{{ s.studentName }}</span>
+            <span class="student-email">{{ s.studentEmail }}</span>
+        </div>
+
+        <div class="progress-container">
+            <progress
+            class="progress-bar"
+            [value]="s.progressPercentage"
+            max="100">
+            </progress>
+            <span class="progress-percent">{{ s.progressPercentage }}%</span>
+        </div>
+        <!-- <div class="progress-wrapper">
+            <div
+                class="progress-fill"
+                [style.width.%]="s.progressPercentage">
+            </div>
+        </div>
+        <span class="progress-percent">
+        {{ s.progressPercentage }}%
+        </span> -->
+
+        </li>
+    </ul>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="page = page - 1; loadStudents()"
+                [disabled]="page === 0">
+        Prev
+        </button>
+
+        <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+
+        <button (click)="page = page + 1; loadStudents()"
+                [disabled]="page >= totalPages - 1">
+        Next
+        </button>
+    </div>
+
+    </section>
 </div>

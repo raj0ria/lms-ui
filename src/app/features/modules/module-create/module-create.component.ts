@@ -15,13 +15,14 @@ import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 export class ModuleCreateComponent {
 
   successMessage = '';
+  errorMessage = '';
 
   courseId!: number;
   courses: Course[] = [];
   course!: Course;
 
   moduleForm = this.fb.group({
-    courseId: ['', Validators.required],
+    courseId: this.fb.control<number | null>(null),
     title: ['', Validators.required],
     contentType: ['video', Validators.required],
     contentUrl: ['', Validators.required]
@@ -32,37 +33,92 @@ export class ModuleCreateComponent {
   ) {}
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe(courses => {
-      // Optional: only show published courses
-      // this.courses = courses.filter(c => c.published);
-      const currentInstructor = 'Jane Doe'; // TODO: get from authService
-      this.courses = courses.filter(c => c.instructor === currentInstructor);
+
+    // Get courseId from route
+    const idParam = this.route.snapshot.paramMap.get('courseId');
+
+    if (idParam) {
+      this.courseId = Number(idParam);
+    }
+
+    // Load courses for dropdown (no hardcoded instructor)
+    this.courseService.getCoursesByInstructor().subscribe({
+      next: (courses) => {
+        this.courses = courses;
+
+        // Preselect current course
+        if (this.courseId) {
+          this.moduleForm.patchValue({
+            courseId: this.courseId
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load courses', err);
+      }
     });
-    this.courseId = Number(this.route.snapshot.paramMap.get('courseId'));
-    this.moduleForm.patchValue({courseId: this.courseId.toString()});
   }
+
+  // ngOnInit(): void {
+  //   this.courseService.getCourses().subscribe(courses => {
+  //     // Optional: only show published courses
+  //     // this.courses = courses.filter(c => c.published);
+  //     const currentInstructor = 'Jane Doe'; // TODO: get from authService
+  //     this.courses = courses.filter(c => c.instructorName === currentInstructor);
+  //   });
+  //   this.courseId = Number(this.route.snapshot.paramMap.get('courseId'));
+  //   this.moduleForm.patchValue({courseId: this.courseId.toString()});
+  // }
 
   submit() {
     if (this.moduleForm.valid) {
-
       const newModule = {
-        id: 0, // will be set inside service
-        courseId: Number(this.moduleForm.value.courseId),
-        title: this.moduleForm.value.title!,
-        contentType: this.moduleForm.value.contentType as 'video' | 'document',
-        contentUrl: this.moduleForm.value.contentUrl!
+        name: this.moduleForm.value.title!,
+        // contentType: this.moduleForm.value.contentType as 'video' | 'document',
+        materialUrl: this.moduleForm.value.contentUrl!
       };
 
-      this.courseService.addModule(newModule);
+      this.courseService.addModule2(this.courseId, newModule).subscribe({
+        next: (createdModule) => {
+          this.successMessage = 'Module added successfully!';
+          
+          // Optionally update local modules list if needed
+          // this.modules.push(createdModule);
+          // this.modules$.next([...this.modules]);
 
-      this.successMessage = 'Module added successfully!';
-
-      // Navigate back to course detail page
-      setTimeout(() => {
-        this.router.navigate(['/courses', this.courseId]);
-      }, 800);
+          // Navigate back to course detail page
+          setTimeout(() => {
+            this.router.navigate(['/courses', this.courseId]);
+          }, 800);
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Failed to add module';
+        }
+      });
     }
   }
+
+  // submit() {
+  //   if (this.moduleForm.valid) {
+
+  //     const newModule = {
+  //       id: 0, // will be set inside service
+  //       courseId: Number(this.moduleForm.value.courseId),
+  //       title: this.moduleForm.value.title!,
+  //       contentType: this.moduleForm.value.contentType as 'video' | 'document',
+  //       contentUrl: this.moduleForm.value.contentUrl!
+  //     };
+
+  //     this.courseService.addModule(newModule);
+  //     this.successMessage = 'Module added successfully!';
+
+  //     // Navigate back to course detail page
+  //     setTimeout(() => {
+  //       this.router.navigate(['/courses', this.courseId]);
+  //     }, 800);
+  //   }
+  // }
 
 
   // submit() {

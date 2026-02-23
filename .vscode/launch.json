@@ -8,6 +8,7 @@
       "request": "launch",
       "preLaunchTask": "npm: start",
       "url": "http://localhost:4200/"
+      // "url": "https://lms-frontend-latest.onrender.com/"
     },
     {
       "name": "ng test",

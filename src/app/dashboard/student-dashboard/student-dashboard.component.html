@@ -67,7 +67,7 @@
 
 
 
-<app-nav-bar></app-nav-bar>
+<!-- <app-nav-bar></app-nav-bar>
 
 <div class="dashboard-container">
   <h2>Student Dashboard</h2>
@@ -98,5 +98,77 @@
     </table>
 
   </ng-container>
-</div>
+</div> -->
 
+
+
+
+
+<app-nav-bar></app-nav-bar>
+<div class="dashboard-container">
+
+  <h2>My Courses</h2>
+
+  <div *ngIf="loading" class="loading">
+    Loading your courses...
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && myCourses.length === 0" class="empty-state">
+    <p>You have not enrolled in any courses yet.</p>
+    <a routerLink="/student/browse">Browse Courses</a>
+  </div>
+
+  <!-- Courses Grid -->
+  <div class="course-grid" *ngIf="!loading && myCourses.length > 0">
+
+    <div class="course-card" *ngFor="let course of myCourses">
+
+      <h3>{{ course.courseTitle }}</h3>
+
+      <p class="date">
+        Enrolled: {{ course.enrolledAt | date:'mediumDate' }}
+      </p>
+
+      <p>
+        Modules Completed: {{ course.completedModules }} / {{ course.totalModules }}
+      </p>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar">
+        <div class="progress-fill"
+             [style.width.%]="course.progressPercentage">
+        </div>
+      </div>
+
+      <p class="progress-text">
+        {{ course.progressPercentage }}% Complete
+      </p>
+
+      <button class="continue-btn" [routerLink]="['/user/courses', course.courseId]">
+        Continue Learning
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1">
+
+    <button (click)="prevPage()" [disabled]="page === 0">
+      Previous
+    </button>
+
+    <span>
+      Page {{ page + 1 }} of {{ totalPages }}
+    </span>
+
+    <button (click)="nextPage()" 
+            [disabled]="page === totalPages - 1">
+      Next
+    </button>
+
+  </div>
+
+</div>

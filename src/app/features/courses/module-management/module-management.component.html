@@ -1,4 +1,4 @@
-<app-nav-bar></app-nav-bar>
+<!-- <app-nav-bar></app-nav-bar>
 
 <div class="detail-container">
 
@@ -12,7 +12,7 @@
   </div>
 
   <div class="modules-section">
-  <div *ngIf="role === 'USER'" class="section-header">     <!--INSTRUCTOR -->
+  <div *ngIf="role === 'INSTRUCTOR'" class="section-header">   
     <h3>Modules</h3>
     <button class="add-btn"
       [routerLink]="['/courses', course.id, 'modules', 'create']">
@@ -76,5 +76,107 @@
 
   </ng-container>
 </div>
+
+</div> -->
+
+
+
+
+
+<app-nav-bar></app-nav-bar>
+
+<div class="module-container">
+
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <h2>Course Modules</h2>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    Loading modules...
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && studentModules.length === 0" class="empty-state">
+    No modules available for this course.
+  </div>
+
+  <!-- Modules List -->
+  <div *ngFor="let module of studentModules" class="module-card">
+
+    <div class="module-header">
+      <h3>{{ module.name }}</h3>
+
+      <span 
+        class="status-badge"
+        [ngClass]="{
+          'not-started': module.status === EnrollmentStatus.NOT_STARTED,
+          'in-progress': module.status === EnrollmentStatus.IN_PROGRESS,
+          'completed': module.status === EnrollmentStatus.COMPLETED
+        }">
+        {{ module.status }}
+      </span>
+    </div>
+
+    <!-- Material Button -->
+    <button 
+      class="material-btn"
+      (click)="openMaterial(module.materialUrl)">
+      ▶ Open Material
+    </button>
+
+    <!-- Progress Buttons (Only for Students) -->
+    <div class="progress-actions">
+      <!-- <select [(ngModel)]="module.status"
+        (ngModelChange)="updateProgress(module.moduleId, $event)"
+        [disabled]="updatingModuleIds.includes(module.moduleId)">
+        <option [ngValue]="EnrollmentStatus.NOT_STARTED">Not Started</option>
+        <option [ngValue]="EnrollmentStatus.IN_PROGRESS">In Progress</option>
+        <option [ngValue]="EnrollmentStatus.COMPLETED">Completed</option>
+      </select> -->
+
+
+      <select
+        [ngModel]="module.status"
+        (ngModelChange)="updateProgress(module.moduleId, $event)"
+        [disabled]="updatingModuleIds.includes(module.moduleId)"
+      >
+
+        <!-- Always show current status -->
+        <option [ngValue]="module.status">
+          {{ module.status }}
+        </option>
+
+        <!-- If NOT_STARTED → allow only IN_PROGRESS -->
+        <option *ngIf="module.status === EnrollmentStatus.NOT_STARTED"
+                [ngValue]="EnrollmentStatus.IN_PROGRESS">
+          In Progress
+        </option>
+
+        <!-- If IN_PROGRESS → allow only COMPLETED -->
+        <option *ngIf="module.status === EnrollmentStatus.IN_PROGRESS"
+                [ngValue]="EnrollmentStatus.COMPLETED">
+          Completed
+        </option>
+
+      </select>
+      <!-- <select
+        [(ngModel)]="module.status"
+        (change)="updateProgress(module.moduleId, module.status)"
+        [disabled]="updatingModuleIds.includes(module.moduleId)"
+      >
+        <option [ngValue]="EnrollmentStatus.NOT_STARTED">Not Started</option>
+        <option [ngValue]="EnrollmentStatus.IN_PROGRESS">In Progress</option>
+        <option [ngValue]="EnrollmentStatus.COMPLETED">Completed</option>
+      </select> -->
+
+      <!-- Updating Spinner -->
+      <span *ngIf="updatingModuleIds.includes(module.moduleId)" class="spinner">
+        Updating...
+      </span>
+
+    </div>
+
+  </div>
 
 </div>

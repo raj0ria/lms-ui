@@ -28,21 +28,52 @@ export class CourseCreateComponent {
 
   constructor(private fb: FormBuilder, private courseService: CourseService, private router: Router) {}
 
-  submit() { 
-    if (this.courseForm.valid) { 
-      this.courseService.addCourse({ 
-        id: 0, title: this.courseForm.value.title!, 
-        description: this.courseForm.value.description!, 
-        capacity: this.courseForm.value.capacity!, 
-        published: false, instructor: 'Current Instructor' 
-      }); 
-      this.successMessage = 'Course created successfully!'; 
-      console.log('Course created!'); 
-      this.courseForm.reset(); 
-      setTimeout(() => {
-        this.router.navigate(['/instructor']);
-      }, 1500);
-    } }
+  // submit() { 
+  //   if (this.courseForm.valid) { 
+  //     this.courseService.addCourse({ 
+  //       id: 0, title: this.courseForm.value.title!, 
+  //       description: this.courseForm.value.description!, 
+  //       capacity: this.courseForm.value.capacity!, 
+  //       published: false, instructor: 'Current Instructor' 
+  //     }); 
+  //     this.successMessage = 'Course created successfully!'; 
+  //     console.log('Course created!'); 
+  //     this.courseForm.reset(); 
+  //     setTimeout(() => {
+  //       this.router.navigate(['/instructor']);
+  //     }, 1500);
+  //   } 
+  // }
+
+  submit() {
+    if (this.courseForm.valid) {
+
+      const newCourse = {
+        id: 0, // backend usually generates this
+        title: this.courseForm.value.title!,
+        description: this.courseForm.value.description!,
+        capacity: this.courseForm.value.capacity!,
+        published: false,
+        instructorName: 'Current Instructor'
+      };
+
+      this.courseService.addCourse(newCourse).subscribe({
+        next: (response) => {
+          this.successMessage = 'Course created successfully!';
+          console.log('Course created!', response);
+
+          this.courseForm.reset();
+
+          setTimeout(() => {
+            this.router.navigate(['/instructor']);
+          }, 1500);
+        },
+        error: (error) => {
+          console.error('Error creating course:', error);
+        }
+      });
+    }
+  }
 
 }
 

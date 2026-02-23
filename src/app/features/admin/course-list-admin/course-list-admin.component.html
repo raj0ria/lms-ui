@@ -67,7 +67,7 @@
         <tr *ngFor="let c of filteredCourses()">
 
           <td>{{ c.title }}</td>
-          <td>{{ c.instructor }}</td>
+          <td>{{ c.instructorName }}</td>
 
           <td>
             <span 
@@ -78,11 +78,11 @@
           </td>
 
           <td class="actions">
-            <button 
+            <!-- <button 
                 class="publish-btn"
                 (click)="togglePublish(c)">
                 {{ c.published ? 'Unpublish' : 'Publish' }}
-            </button>
+            </button> -->
 
             <button 
               class="delete-btn"

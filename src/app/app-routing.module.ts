@@ -15,6 +15,7 @@ import { CourseDetailComponent } from "./features/courses/course-detail/course-d
 import { ModuleManagementComponent } from "./features/courses/module-management/module-management.component";
 import { StudentBrowseComponent } from "./features/student/student-browse/student-browse.component";
 import { EnrollComponent } from "./features/student/enroll/enroll.component";
+import { BrowseComponent } from "./features/student/browse/browse.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -24,7 +25,9 @@ export const routes: Routes = [
     canActivate:[AuthGuard, RoleGuard], 
     data: {roles: ['STUDENT', 'ADMIN'] },  
     component: StudentDashboardComponent},
-  { path: 'courses', component: StudentBrowseComponent, 
+  {path: 'user/courses/:courseId', component: ModuleManagementComponent, 
+    canActivate: [RoleGuard], data: { role: 'STUDENT' }},
+  { path: 'courses', component: BrowseComponent, 
     canActivate: [RoleGuard], data: { role: 'STUDENT' } },
   { path: 'enrollments/create', component: EnrollComponent, 
     canActivate: [RoleGuard], data: { role: 'STUDENT' } },
@@ -41,7 +44,7 @@ export const routes: Routes = [
   {path: 'courses/:courseId/modules/create', component: ModuleCreateComponent, 
     canActivate: [RoleGuard], data: { role: 'INSTRUCTOR' }},//'INSTRUCTOR' }},
   {
-    path: 'courses/:courseId', component: ModuleManagementComponent //CourseDetailComponent
+    path: 'courses/:courseId', component: CourseDetailComponent //ModuleManagementComponent
   },
   {
     path: 'admin', canActivate: [AuthGuard, RoleGuard], 

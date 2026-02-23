@@ -62,7 +62,7 @@
       </ng-container>
 
       <!-- Instructor -->
-      <ng-container *ngIf="authService.hasRole('USER')">
+      <ng-container *ngIf="authService.hasRole('INSTRUCTOR')">
         <li><a routerLink="/instructor" routerLinkActive="active">Dashboard</a></li>
         <li><a routerLink="/courses/create" routerLinkActive="active">Create Course</a></li>
         <li>
@@ -70,12 +70,13 @@
             <!-- <a [routerLink]="['/courses', courseId, 'modules', 'create']"
                 routerLinkActive="active">Create Module
             </a> -->
-            <a routerLink="['/modules/create']" routerLinkActive="active">Create Module</a>
+
+            <!-- <a routerLink="['/modules/create']" routerLinkActive="active">Create Module</a> -->
         </li>
       </ng-container>
 
       <!-- Student -->
-      <ng-container *ngIf="authService.hasRole('USER')">
+      <ng-container *ngIf="authService.hasRole('STUDENT')">
         <li><a routerLink="/user" routerLinkActive="active">Dashboard</a></li>
         <li><a routerLink="/courses" routerLinkActive="active">Browse</a></li>
         <li><a routerLink="/enrollments/create" routerLinkActive="active">Enroll</a></li>

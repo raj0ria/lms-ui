@@ -15,3 +15,4 @@ export interface Course {
   instructorName: string;
   createdAt: string; // or Date if you convert it
 }
+
